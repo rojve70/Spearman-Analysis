@@ -1,0 +1,43 @@
+# Perform both t-tests and correlation tests for key parameters                                                                                                                                                                                                                                                                                                                               
+  
+import scipy.stats as stats
+import pandas as pd                                                             
+# Sample data
+leachate_data = pd.DataFrame({
+     'Month': ['Jan', 'Feb', 'Jul', 'Aug'],
+    'Season': ['Dry', 'Dry', 'Wet', 'Wet'],
+    'pH': [6.1, 5.8, 6.6, 6.7                    
+  ],
+    'BOD': [324, 290, 410, 500],
+    'COD': [1025, 980, 1145, 1250],
+    'TDS': [2390, 2245, 2450, 2650],
+    'Ammonium': [16, 13, 24, 35],                                                                                                    
+    'Phosphate': [7, 5, 10, 12],
+    'Cl': [235, 215, 270, 300],                                                                                                                   
+    'Fe': [0.17, 0.12, 0.2, 0.21],
+    'As': [0.008, 0.007, 0.01, 0.018]
+})
+    
+surface_water_data = pd.DataFrame({
+    'Month': ['Jan', 'Feb', 'Jul', 'Aug'],
+    'Season': ['Dry', 'Dry', 'Wet', 'Wet'],
+    'pH': [5.4, 5.6, 5.5, 5.7],
+    'BOD': [1.96, 2.08, 2.34, 2.52],
+    'COD': [5.1, 5.6, 6.5, 6.7],
+    'TDS': [275, 360, 400, 550],
+    'Ammonium': [2.9, 3.4, 3.3, 3.7],                                        
+    'Phosphate': [2, 2, 3, 5],
+    'Cl': [120, 135, 155, 200],                                                                                                                                                                                  
+    'Fe': [1.8, 2, 1.9, 2.1],
+    'As': [0.006, 0.034, 0.01, 0.05]
+})
+
+
+# Sample data (assuming you have defined leachate_data and surface_water_data as DataFrames)
+
+parameters = ['pH', 'BOD', 'COD', 'TDS', 'Ammonium', 'Phosphate', 'Cl', 'Fe', 'As']
+
+print("Spearman Correlation Coefficient Tests Results:")
+for param in parameters:
+    corr_coef, p_value = stats.spearmanr(leachate_data[param], surface_water_data[param])
+    print(f'Parameter: {param}, Spearman Correlation Coefficient: {corr_coef:.2f}, P-Value: {p_value:.3f}')
